@@ -44,9 +44,12 @@
                         </g>
                     </g>
                 </svg>
+
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-1">LaundryCeria</span>
         </a>
+
+
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -69,7 +72,7 @@
             <span class="menu-header-text">Pages</span>
         </li>
 
-        <?php if ($_SESSION['id_level'] == 5): ?>
+        <?php if ($_SESSION['id_level'] == 1): ?>
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -100,7 +103,7 @@
                 </ul>
             </li>
         <?php endif ?>
-        <?php if ($_SESSION['id_level'] == 5 or $_SESSION['id_level'] == 6): ?>
+        <?php if ($_SESSION['id_level'] == 1 or $_SESSION['id_level'] == 2): ?>
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>

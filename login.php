@@ -2,9 +2,9 @@
 session_start();
 include 'koneksi.php';
 
-function loginQuery($koneksi, $kolom, $params)
+function loginQuery($koneksi, $params)
 {
-    $query = mysqli_query($koneksi, "SELECT * FROM user");
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE email ='$params'");
     if (mysqli_num_rows($query) > 0) {
         return $query;
     } else {
@@ -15,41 +15,24 @@ if (isset($_POST['login'])) {
     $email    = $_POST['email']; //untuk mengambil nilai dari input
     $password = $_POST['password'];
 
-    $queryLogin = loginQuery($koneksi, "name", $email);
-    $queryEmail = loginQuery($koneksi, "email", $email);
+    $queryLogin = loginQuery($koneksi, "username", $email);
+    $queryEmail = loginQuery($koneksi, $email);
 
-    // login dengan username
-    if ($queryLogin) {
-        $rowLogin = mysqli_fetch_assoc($queryLogin);
-        if ($password == $rowLogin['password']) {
-            $_SESSION['nama'] = $rowLogin['nama'];
-            $_SESSION['id']   = $rowLogin['id'];
-            $_SESSION['id_level'] = $rowLogin['id_level'];
-            header("location:index.php");
-        } else {
-            header("location:login.php?login=gagal");
-        }
-    } elseif ($queryEmail) {
-        $rowLogin = mysqli_fetch_assoc($queryEmail);
-        if ($password == $rowLogin['password']) {
-            $_SESSION['nama'] = $rowLogin['nama'];
-            $_SESSION['id']   = $rowLogin['id'];
-            $_SESSION['id_level'] = $rowLogin['id_level'];
-            header("location:index.php");
-        } else {
-            header("location:login.php?login=gagal");
-        }
-    }
+    $rowLogin = mysqli_fetch_assoc($queryEmail);
 
-    // login dengan email
+    if ($password == $rowLogin['password']) {
 
-    // $queryLogin = mysqli_query($koneksi, "SELECT * FROM user WHERE email='$email'");
-    // mysqli_num_row() : untuk melihat total data di dalam table
-    if (mysqli_num_rows($queryLogin) > 0) {
+
+        $_SESSION['nama'] = $rowLogin['nama'];
+        $_SESSION['id']   = $rowLogin['id'];
+        $_SESSION['id_level'] = $rowLogin['id_level'];
+        header("location:index.php");
     } else {
 
         header("location:login.php?login=gagal");
     }
+    // login dengan username
+
 }
 
 ?>
